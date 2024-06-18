@@ -13,8 +13,7 @@ rm $1
 names=$(grep "^<file" maindata.xml)
 k=0
 while read ln; do 
-    full_song=`echo "$ln" | rev | cut -d'/' -f 2 | rev`
-    full_song=`echo "$full_song" | rev | cut -d'.' -f 2 | rev`
+    full_song=`echo "$ln" | rev | cut -d '/' -f 2 | cut -d '.' -f 2 | rev
 
     artist=$(cut -d " - " -f 1 <<< "$full_song" | xargs -0)
     #artist="${artist##*( )}"
