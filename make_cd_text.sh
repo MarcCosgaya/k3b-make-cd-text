@@ -14,12 +14,8 @@ names=$(grep "^<file" maindata.xml)
 k=0
 while read ln; do 
     full_song=`echo "$ln" | rev | cut -d '/' -f 2 | cut -d '.' -f 2 | rev`
-
-    artist=$(cut -d " - " -f 1 <<< "$full_song" | xargs -0)
-    #artist="${artist##*( )}"
-
-    song=$(cut -d " - " -f 2 <<< "$full_song" | xargs -0)
-    #song="${song%%*( )}"
+    artist=`echo "$full_song" | awk -F " - " '{print $1}'`
+    song=`echo "$full_song" | awk -F " - " '{print $2}'`
 
     songs[$k]="$song"
     artists[$k]="$artist"
